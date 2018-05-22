@@ -21,6 +21,46 @@
                  acc))
            [] suites)))
 
+(defn interpose-seq [elt s]
+  "40. Separates the items of a sequence by an arbitrary value."
+  (loop [seq s
+         res []]
+    (if (empty? (rest seq))
+        (conj res (first seq))
+        (recur (rest seq) (-> res
+                            (conj (first seq))
+                            (conj elt))))))
+
+(defn interleave-seq [s1 s2]
+  "39. takes two sequences and returns the first item from each,
+   then the second item from each, then the third, etc."
+  (loop [is1 s1
+         is2 s2
+         res []]
+    (if (or (empty? is1)
+            (empty? is2))
+        res
+        (recur (rest is1) (rest is2) (-> res
+                                         (conj (first is1))
+                                         (conj (first is2)))))))
+
+(defn max-value [& args]
+  "38. Takes a variable number of parameters and returns the maximum value."
+  (reduce (fn [acc elt]
+            (if (> elt acc)
+              elt
+              acc))
+          (first args)
+          args))
+
+(defn range-seq [x n]
+  "34. Creates a list of all integers in a given range."
+  (loop [i x
+         res []]
+    (if (= i n)
+        res
+        (recur (inc i) (conj res i)))))
+
 (defn replic [s, n]
   "33. Replicates each element of a sequence a variable number of times."
   (reduce (fn [acc item]
