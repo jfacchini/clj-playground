@@ -21,6 +21,18 @@
                  acc))
            [] suites)))
 
+(defn calc-factorial [n]
+  "42. Calculates factorials. Only until 20!"
+  (apply * (rest (range (inc n)))))
+
+(defn drop-nth-items [xs n]
+  "41. Drops every Nth item from a sequence."
+  (loop [v xs
+         res []]
+    (if (< (count v) n)
+        (flatten (conj res v))
+        (recur (vec (nthnext v n)) (conj res (subvec v 0 (dec n)))))))
+
 (defn interpose-seq [elt s]
   "40. Separates the items of a sequence by an arbitrary value."
   (loop [seq s
