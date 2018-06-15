@@ -21,6 +21,17 @@
                  acc))
            [] suites)))
 
+(defn reverse-interleave [s n]
+  "43. Reverses the interleave process into x number of subsequences."
+  (loop [[x & xs] s
+         i 0
+         res (vec (for [j (range n)] []))]
+    (if (nil? x)
+      res
+      (recur xs
+             (if (= i (dec n)) 0 (inc i))
+             (assoc res i (conj (res i) x))))))
+
 (defn calc-factorial [n]
   "42. Calculates factorials. Only until 20!"
   (apply * (rest (range (inc n)))))
